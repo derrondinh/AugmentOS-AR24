@@ -17,7 +17,7 @@ export default function App() {
 
     if (userId == undefined || userId == null || userId == "") {
       console.log("No userID in URL - checking for existing userID");
-      userId = Cookies.get("userId");
+      userId = Cookies.get("userId") || null;
     }
 
     if (userId == undefined || userId == null || userId == "") {
