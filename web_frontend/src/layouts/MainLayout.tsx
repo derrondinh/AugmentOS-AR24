@@ -60,7 +60,8 @@ const MainLayout = () => {
 
   const entities = useRecoilValue(entitiesState);
   const isExplicitListening = useRecoilValue(isExplicitListeningState);
-  const showExplorePane = useRecoilValue(showExplorePaneValue);
+  //const showExplorePane = useRecoilValue(showExplorePaneValue);
+  const showExplorePane = true;
   const setSelectedCardId = useSetRecoilState(selectedCardIdState);
   const [loadingViewMore, setLoadingViewMore] = useState(false);
 

@@ -3,6 +3,7 @@ import { Collapse } from "@material-ui/core";
 import { TransitionGroup } from "react-transition-group";
 import ExplicitCard from "./ExplicitCard";
 import ReferenceCard from "./ReferenceCard";
+import { useEffect } from "react";
 import {
   entitiesState,
   isExplicitListeningState,
@@ -15,6 +16,18 @@ const CardScrollArea = () => {
   const isExplicitListening = useRecoilValue(isExplicitListeningState);
   const [selectedCardId, setSelectedCardId] =
     useRecoilState(selectedCardIdState);
+
+  function makeTopCardTheSelectedCard() {
+    if (entities.length != 0) {
+      setSelectedCardId(entities[entities.length-1].uuid);
+    }
+  }
+
+  useEffect(() => {
+    if (entities != null){
+    makeTopCardTheSelectedCard();
+    }
+  }, [entities]);
 
   return (
     <ScrollArea scrollHideDelay={100} h="100%" type="never">
