@@ -26,7 +26,7 @@ import {
   entitiesState,
   isExplicitListeningState,
   selectedCardIdState,
-  showExplorePaneValue,
+  //showExplorePaneValue,
 } from "../recoil";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { useState } from "react";
@@ -49,9 +49,10 @@ const useStyles = createStyles({
 
   container: {
     width: "100%",
+    maxWidth: "auto",
     height: "100%",
     padding: 0,
-    flex: "1 1 0",
+    //flex: "1 1 0",
   },
 });
 
@@ -86,10 +87,12 @@ const MainLayout = () => {
           layout
           fluid
           className={classes.container}
-          w={showExplorePane ? "50%" : "100%"}
+          //w={showExplorePane ? "50%" : "100%"}
+          w={"40%"}
           pt={`${GAP_VH}vh`}
           px={"1rem"}
           transition={{ bounce: 0 }}
+          mx={"0px"}
         >
           {entities.length === 0 && !isExplicitListening && (
             <Box w="50%" mx="auto" mt="xl">
@@ -103,12 +106,17 @@ const MainLayout = () => {
         <PContainer
           component={motion.div}
           layout
-          sx={{
-            flex: showExplorePane ? "1 1 0" : "0",
-          }}
+          mx={"0px"}
+//          sx={{
+//            flex: showExplorePane ? "1 1 0" : "0",
+//          }}
           className={classes.container}
+            sx={{
+            maxWidth: "none", // Disables max-width
+            // Add more styles here as needed
+          }}
         >
-          <Flex sx={{ height: "100%" }}>
+        <Flex mx={"0px"} sx={{ height: "100%", maxWidth: "auto"}}>
             {entities.length > 0 && (
               <Stack align="center" w="3rem">
                 <ActionIcon
@@ -119,7 +127,7 @@ const MainLayout = () => {
                         : undefined
                     );
                   }}
-                  size={rem(25)}
+                  size={rem(5)}
                   mt="sm"
                   disabled={entities.at(-1)?.url === undefined}
                 >

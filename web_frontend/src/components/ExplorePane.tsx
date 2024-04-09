@@ -1,4 +1,4 @@
-import { ActionIcon, Skeleton, Tooltip, Text } from "@mantine/core";
+import { ActionIcon, Skeleton, Tooltip } from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons-react";
 import { explorePaneUrlValue, selectedEntityValue } from "../recoil";
 import { useRecoilValue } from "recoil";
@@ -17,13 +17,13 @@ const ExplorePane = ({ loading, setLoading}: ExplorePaneProps) => {
 
   //Latent Lab Connection ------ Below
 
-  const [inputValue, setInputValue] = useState('');
+  //const [inputValue, setInputValue] = useState('');
   const [sources, setSources] = useState<any[]>([]);
   // const iframeRef = useRef(null);
 
-  const handleInputChange = (searchTerm: React.SetStateAction<string>) => {
-    setInputValue(searchTerm);
-  };
+//  const handleInputChange = (searchTerm: React.SetStateAction<string>) => {
+//    setInputValue(searchTerm);
+//  };
 
   // This useEffect hook runs handleUpdateSearch whenever inputValue changes
   // useEffect(() => {
@@ -53,8 +53,7 @@ const ExplorePane = ({ loading, setLoading}: ExplorePaneProps) => {
   // }, [viewMoreUrl]);
 
   window.addEventListener("message", (event) => {
-    // console.log("Parent received connection from Latent Lab")
-    // console.log(event)
+    // console.log("Parent received connection from Latent Lab") // console.log(event)
     setSources([...sources, event.source])
   }, false);
 
@@ -63,15 +62,15 @@ const ExplorePane = ({ loading, setLoading}: ExplorePaneProps) => {
     // console.log(sources.length)
     // console.log(sources)
     sources.forEach(source => {
-      source.postMessage({searchTerm: latentLabQuery}, "http://localhost:3000/")
+      source.postMessage({searchTerm: latentLabQuery}, "https://airroom.media.mit.edu")
     })
   }
 
-  const handleSubmit = () => {
-    sources.forEach(source => {
-      source.postMessage({submit: 1}, "http://localhost:3000/")
-    })
-  };
+//  const handleSubmit = () => {
+//    sources.forEach(source => {
+//      source.postMessage({submit: 1}, "http://localhost:3000/")
+//    })
+//  };
 
   //Latent Lab Connection ------ Above
 
@@ -87,6 +86,7 @@ const ExplorePane = ({ loading, setLoading}: ExplorePaneProps) => {
       h={"100%"}
       w={"100%"}
       sx={{ position: "relative" }}
+      mx={"0px"}
     >
       <Tooltip label="Open page in browser">
         <ActionIcon
@@ -110,7 +110,8 @@ const ExplorePane = ({ loading, setLoading}: ExplorePaneProps) => {
         <iframe
           id="zoomed-in-iframe"
           // src={viewMoreUrl}
-          src="http://localhost:3000/media-lab/"
+          //src="http://localhost:3000/media-lab/"
+          src="/LatentLab/media-lab"
           onLoad={handleLoad}
           width="100%"
           height="100%"
