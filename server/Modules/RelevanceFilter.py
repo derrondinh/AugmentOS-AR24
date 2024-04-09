@@ -193,10 +193,10 @@ class RelevanceFilter:
 
         # Filter the cse_outputs based on the combined banned terms
         cse_outputs_filtered = [cse_output for cse_output in cse_outputs if cse_output["name"] not in terms_to_filter]
+
         # print(f"===========================CSE OUTPUTS FILTERED: {cse_outputs_filtered}==============================")
         if not cse_outputs_filtered:
             return []
-
 
         # print(f"===========================ENTITIES: {cse_outputs_filtered}==============================")
         entities_filtered = self.llm_relevance_filter(cse_outputs_filtered, context)
@@ -212,7 +212,7 @@ class RelevanceFilter:
         # print(f"===========================ENTITIES FILTERED: {str(entities_filtered)}==============================")
 
         # valid_outputs.extend(entities_filtered)
-        final_entities = [entity for entity in entities_filtered_dict.keys() if entities_filtered_dict[entity] >= LLM_FILTER_THRESHOLD]
+        final_entities = [entity for entity in entities_filtered_dict.keys() if True] #entities_filtered_dict[entity] >= LLM_FILTER_THRESHOLD]
         # print(f"===========================CSE OUTPUTS FILTERED: {final_entities}==============================")
 
         return final_entities

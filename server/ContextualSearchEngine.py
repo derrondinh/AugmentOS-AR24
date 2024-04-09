@@ -83,7 +83,7 @@ def find_combinations(words, window_size):
 
 class ContextualSearchEngine:
     def __init__(self, db_handler):
-        self.client = googlemaps.Client(key=google_maps_api_key)
+        #self.client = googlemaps.Client(key=google_maps_api_key)
         self.user_custom_data_path = "./custom_data/"
         self.db_handler = db_handler
         self.summarizer = Summarizer(db_handler)
