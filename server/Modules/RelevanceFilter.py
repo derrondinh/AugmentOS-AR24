@@ -165,6 +165,11 @@ A list of "Entity Scores", formatted like this:
 <Context>{context}</Context>
 <Entity>{entity}</Entity>
 
+
+If there are multiple options for the same entity, give all but a single one a rating of "1", so we only see a single definition.
+
+If a definition is suggested that doesn't align with what is said, give the definition a score of "1".
+
 Only output the JSON entity score list, nothing else!
 """
 )
@@ -212,7 +217,8 @@ class RelevanceFilter:
         # print(f"===========================ENTITIES FILTERED: {str(entities_filtered)}==============================")
 
         # valid_outputs.extend(entities_filtered)
-        final_entities = [entity for entity in entities_filtered_dict.keys() if True] #entities_filtered_dict[entity] >= LLM_FILTER_THRESHOLD]
+        #final_entities = [entity for entity in entities_filtered_dict.keys() if True] #entities_filtered_dict[entity] >= LLM_FILTER_THRESHOLD]
+        final_entities = [entity for entity in entities_filtered_dict.keys() if entities_filtered_dict[entity] >= LLM_FILTER_THRESHOLD]
         # print(f"===========================CSE OUTPUTS FILTERED: {final_entities}==============================")
 
         return final_entities

@@ -29,6 +29,8 @@ Conversational Context (DO NOT include this in the summary, just use it to help 
 {}
 ```
 
+Leave out any html tags in the summary!
+
 Summary in 8 words or less:\n
 """
 
