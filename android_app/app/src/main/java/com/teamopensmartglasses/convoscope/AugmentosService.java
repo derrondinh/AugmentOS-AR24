@@ -81,9 +81,7 @@ import com.teamopensmartglasses.smartglassesmanager.speechrecognition.ASR_FRAMEW
 import com.teamopensmartglasses.smartglassesmanager.supportedglasses.SmartGlassesDevice;
 import com.teamopensmartglasses.smartglassesmanager.supportedglasses.SmartGlassesOperatingSystem;
 
-import javax.microedition.khronos.opengles.GL;
-
-public class ConvoscopeService extends SmartGlassesAndroidService {
+public class AugmentosService extends SmartGlassesAndroidService {
     public final String TAG = "Convoscope_ConvoscopeService";
 
     private final IBinder binder = new LocalBinder();
@@ -171,7 +169,7 @@ public class ConvoscopeService extends SmartGlassesAndroidService {
 
     private DisplayQueue displayQueue;
 
-    public ConvoscopeService() {
+    public AugmentosService() {
         super(ConvoscopeUi.class,
                 "convoscope_app",
                 3588,
@@ -191,7 +189,7 @@ public class ConvoscopeService extends SmartGlassesAndroidService {
         //make responses holder
         responsesBuffer = new ArrayList<>();
         responsesToShare = new ArrayList<>();
-        responsesBuffer.add("Welcome to Convoscope.");
+        responsesBuffer.add("Welcome to AugmentOS.");
 
         //make responses holder
         transcriptsBuffer = new ArrayList<>();
@@ -216,7 +214,7 @@ public class ConvoscopeService extends SmartGlassesAndroidService {
         setUpLocationSending();
 
         //setup ASR version
-        ConvoscopeService.saveChosenAsrFramework(this, ASR_FRAMEWORKS.AZURE_ASR_FRAMEWORK);
+        AugmentosService.saveChosenAsrFramework(this, ASR_FRAMEWORKS.AZURE_ASR_FRAMEWORK);
 //        ConvoscopeService.saveChosenAsrFramework(this, ASR_FRAMEWORKS.DEEPGRAM_ASR_FRAMEWORK);
 //        ConvoscopeService.saveChosenAsrFramework(this, ASR_FRAMEWORKS.GOOGLE_ASR_FRAMEWORK);
 
@@ -235,7 +233,7 @@ public class ConvoscopeService extends SmartGlassesAndroidService {
     @Override
     protected void onGlassesConnected(SmartGlassesDevice device) {
         Log.d(TAG, "Glasses connected successfully: " + device.deviceModelName);
-        setFontSize(SmartGlassesFontSize.LARGE);
+        setFontSize(SmartGlassesFontSize.MEDIUM);
         displayQueue.startQueue();
     }
 
