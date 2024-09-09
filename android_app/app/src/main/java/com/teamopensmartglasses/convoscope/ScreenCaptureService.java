@@ -67,12 +67,13 @@ public class ScreenCaptureService extends Service {
     private Runnable imageBufferRunnableCode;
     private final Handler imageBufferLoopHandler = new Handler(Looper.getMainLooper());
     Bitmap bitmapBuffer = null;
-    private static final long TEXT_DEBOUNCE_TIME_MS = 500;
+    private static final long TEXT_DEBOUNCE_TIME_MS = 350;
     private static final long IMAGE_DEBOUNCE_TIME_MS = 1200;
     public Boolean textOnly = true;
     private long lastProcessedTime = 0;
     private String lastNewText = "";
     private Bitmap lastNewImage = null;
+    private int imageCounter = 0;
 
     @Override
     public void onCreate() {
@@ -171,7 +172,7 @@ public class ScreenCaptureService extends Service {
 
     private void startCapturing() {
         //turn off BLE SCO audio here via SmartGlassesManager (SGM) to allow user to watch videos, use video camera, etc.
-        EventBus.getDefault().post(new DisableBleScoAudioEvent(true));
+//        EventBus.getDefault().post(new DisableBleScoAudioEvent(true));
 
         //start screen capture
         DisplayMetrics metrics = new DisplayMetrics();
@@ -184,7 +185,7 @@ public class ScreenCaptureService extends Service {
 
         // Setup ImageReader to capture screen
         imageReader = ImageReader.newInstance(screenWidth, screenHeight, PixelFormat.RGBA_8888, 2);
-        mediaProjection.createVirtualDisplay("ScreenCapture",
+        mediaProjection.createVirtualDisplay("AugmentOS ScreenCapture",
                 screenWidth, screenHeight, screenDensity,
                 DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
                 imageReader.getSurface(), null, null);
@@ -193,8 +194,17 @@ public class ScreenCaptureService extends Service {
             @Override
             public void onImageAvailable(ImageReader reader) {
                 Image image = null;
+                int n = 20;
+
                 try {
                     image = reader.acquireLatestImage();
+
+                    imageCounter++;
+                    if (imageCounter != 0 && imageCounter % n != 0){ //only run every n frames
+                        image.close();
+                        return;
+                    }
+
                     if (image != null) {
                         bitmapBuffer = imageToBitmap(image);
                         image.close();
