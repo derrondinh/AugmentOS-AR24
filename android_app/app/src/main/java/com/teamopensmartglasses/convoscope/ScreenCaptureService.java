@@ -289,7 +289,7 @@ public class ScreenCaptureService extends Service {
 
 
             if (!haveBitmapsChangedSignificantly(bitmap, lastNewImage, 222)) return;
-            Log.d(TAG, "Bitmaps are different enough!");
+//            Log.d(TAG, "Bitmaps are different enough!");
             lastNewImage = bitmap;
 
             // Maximum allowed dimensions
@@ -367,7 +367,7 @@ public class ScreenCaptureService extends Service {
 
                         // Retrieve the screen height
                         int screenHeight = getScreenHeight(context);
-                        Log.d(TAG, "screen height is: " + screenHeight);
+//                        Log.d(TAG, "screen height is: " + screenHeight);
 
                         // Define the ratio (e.g., 0.02 for 2% of the screen height)
                         float textSizeDropHeightRatio = 0.008f;
@@ -386,7 +386,7 @@ public class ScreenCaptureService extends Service {
                         }
 
                         // Sort lines by their bounding box top coordinate (y)
-                        Log.d(TAG, allLines.toString());
+//                        Log.d(TAG, allLines.toString());
                         Collections.sort(allLines, new Comparator<Text.Line>() {
                             @Override
                             public int compare(Text.Line line1, Text.Line line2) {
@@ -463,7 +463,7 @@ public class ScreenCaptureService extends Service {
 
                         if (levenshteinDistance(processedText, lastNewText) <= 5) return;
 
-                        Log.d(TAG, "NEW TEXT:\n" + processedText);
+//                        Log.d(TAG, "NEW TEXT:\n" + processedText);
 
                         lastNewText = processedText;
 
